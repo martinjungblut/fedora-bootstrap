@@ -1,0 +1,13 @@
+[thirdparty-docker-$basearch]
+name=thirdparty-docker-$basearch
+baseurl=https://download.docker.com/linux/fedora/$releasever/$basearch/stable
+enabled=1
+gpgcheck=1
+gpgkey=https://download.docker.com/linux/fedora/gpg
+
+[thirdparty-docker-sources]
+name=thirdparty-docker-sources
+baseurl=https://download.docker.com/linux/fedora/$releasever/source/stable
+enabled=0
+gpgcheck=1
+gpgkey=https://download.docker.com/linux/fedora/gpg

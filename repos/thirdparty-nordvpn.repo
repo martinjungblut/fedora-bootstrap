@@ -1,0 +1,16 @@
+####################################################################
+# NordVPN releases, stable                                         #
+####################################################################
+[thirdparty-nordvpn-$basearch]
+name=thirdparty-nordvpn-$basearch
+baseurl=https://repo.nordvpn.com/yum/nordvpn/centos/$basearch
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-NordVPN
+
+[thirdparty-nordvpn-noarch]
+name=thirdparty-nordvpn-noarch
+baseurl=https://repo.nordvpn.com/yum/nordvpn/centos/noarch
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-NordVPN

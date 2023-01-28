@@ -1,0 +1,11 @@
+[copr-sixg0000d-golang-$basearch]
+name=copr-sixg0000d-golang-$basearch
+baseurl=https://download.copr.fedorainfracloud.org/results/sixg0000d/golang/fedora-$releasever-$basearch/
+type=rpm-md
+skip_if_unavailable=True
+gpgcheck=1
+gpgkey=https://download.copr.fedorainfracloud.org/results/sixg0000d/golang/pubkey.gpg
+repo_gpgcheck=0
+enabled=1
+enabled_metadata=1
+module_hotfixes=1

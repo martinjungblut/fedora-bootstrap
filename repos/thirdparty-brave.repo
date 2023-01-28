@@ -1,0 +1,4 @@
+[thirdparty-brave-$basearch]
+name=thirdparty-brave-$basearch
+baseurl=https://brave-browser-rpm-release.s3.brave.com/x86_64/
+enabled=1
