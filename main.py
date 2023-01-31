@@ -30,6 +30,11 @@ def subprocess_dnf(target, release, *args):
         print(result.stderr.decode("utf-8"))
 
 
+def subprocess_mount(*, source, destination, t):
+    print("Mounting '{}' to '{}'.".format(source, destination))
+    subprocess.run(["mount", "-t", t, source, destination], capture_output=True)
+
+
 def subprocess_rm(path):
     print("Removing '{}'.".format(path))
     subprocess.run(["rm", "-rf", path], capture_output=True)
@@ -125,6 +130,20 @@ def install(
                 destination=os.path.join(target, "etc/yum.repos.d"),
             )
 
+    subprocess_mkdir(os.path.join(target, "proc"))
+    subprocess_mount(t="proc", source="proc", destination=os.path.join(target, "proc"))
+
+    subprocess_mkdir(os.path.join(target, "sys"))
+    subprocess_mount(t="sysfs", source="sysfs", destination=os.path.join(target, "sys"))
+
+    subprocess_mkdir(os.path.join(target, "dev"))
+    subprocess_mount(
+        t="devtmpfs", source="devtmpfs", destination=os.path.join(target, "dev")
+    )
+    subprocess_mount(
+        t="devpts", source="devpts", destination=os.path.join(target, "dev", "pts")
+    )
+
     subprocess_dnf(
         target, release, "groupinstall", "Minimal Install", "base-x", "i3 desktop"
     )
@@ -145,17 +164,17 @@ def install(
         "kernel-modules",
         "kernel-modules-extra",
         "kernel-devel",
-        "kernel-devel-matches",
-        "linux-firmware",
+        "kernel-devel-matched",
     )
     subprocess_dnf(
         target,
         release,
         "install",
-        "iwlax2xx-firmware",
-        "intel-gpu-firmware",
+        "linux-firmware",
         "amd-gpu-firmware",
+        "intel-gpu-firmware",
         "nvidia-gpu-firmware",
+        "iwlax2xx-firmware",
     )
     subprocess_dnf(
         target, release, "install", "sddm", "rofi", "arandr", "lxrandr", "autorandr"
@@ -166,6 +185,20 @@ def install(
         target, release, "install", "pipewire", "pipewire-pulseaudio", "wireplumber"
     )
     subprocess_dnf(target, release, "install", "fedora-gpg-keys")
+    subprocess_dnf(
+        target,
+        release,
+        "install",
+        "grub2-common",
+        "grub2-tools",
+        "grub2-tools-extra",
+        "grub2-pc",
+        "grub2-pc-modules",
+        "grub2-efi-x64",
+        "grub2-efi-x64-modules",
+        "grub2-tools-efi",
+        "shim",
+    )
 
 
 if __name__ == "__main__":
