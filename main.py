@@ -202,6 +202,7 @@ def install(
         'kernel-modules-extra',
         'kernel-devel',
         'kernel-devel-matched',
+        'glibc-langpack-en',
     )
     subprocess_dnf(
         target,
